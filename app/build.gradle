@@ -1,0 +1,142 @@
+plugins {
+    id 'com.android.application'
+    id 'kotlin-android'
+    id 'kotlin-kapt'
+}
+
+android {
+    compileSdkVersion 30
+    buildToolsVersion "30.0.3"
+
+    testOptions {
+        unitTests.includeAndroidResources = true
+    }
+
+    defaultConfig {
+        applicationId "com.decagon.weather"
+        minSdkVersion 21
+        targetSdkVersion 30
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = ["room.incremental":"true"]
+                arguments += ["room.schemaLocation":
+                                      "$projectDir/schemas".toString()]
+            }
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    //Add the packagingOptions block inside the android block to exclude the atomic functions module from the package and prevent warnings.
+    packagingOptions {
+        exclude 'META-INF/atomicfu.kotlin_module'
+    }
+
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+
+    buildFeatures {
+        viewBinding true
+    }
+}
+
+dependencies {
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$rootProject.kotlinStdVersion"
+    implementation "androidx.core:core-ktx:$rootProject.coreKtxVersion"
+    implementation "androidx.appcompat:appcompat:$rootProject.appcompatVersion"
+    implementation "com.google.android.material:material:$rootProject.materialVersion"
+    implementation "androidx.annotation:annotation:$rootProject.annotationVersion"
+    implementation "androidx.constraintlayout:constraintlayout:$rootProject.constraintlayoutVersion"
+    implementation "androidx.recyclerview:recyclerview:$rootProject.recyclerViewVersion"
+
+    //DI Library
+    dependencies {
+        implementation "com.google.dagger:dagger:$rootProject.daggerVersion"
+        annotationProcessor("com.google.dagger:dagger-android:$rootProject.daggerVersion")
+        implementation "com.google.dagger:dagger-android-support:$rootProject.daggerVersion"
+        kapt "com.google.dagger:dagger-compiler:$rootProject.daggerVersion"
+        kapt "com.google.dagger:dagger-android-processor:$rootProject.daggerVersion"
+    }
+
+    // GOOGLE Json Library for JSON manipulation
+    dependencies {
+        implementation "com.google.code.gson:gson:$rootProject.gsonVersion"
+    }
+
+    // TEST Libraries
+    dependencies {
+        testImplementation "junit:junit:$rootProject.junitVersion"
+        androidTestImplementation "androidx.arch.core:core-testing:$rootProject.coreTestingVersion"
+        androidTestImplementation ("androidx.test.espresso:espresso-core:$rootProject.espressoVersion", {
+            exclude group: 'com.android.support', module: 'support-annotations'
+        })
+        androidTestImplementation("androidx.test.espresso:espresso-contrib:$rootProject.espressoContribVersion") {
+            exclude group: 'com.android.support', module: 'appcompat'
+            exclude group: 'com.android.support', module: 'support-v4'
+        }
+        androidTestImplementation "com.android.support.test:rules:$rootProject.testRulesVersion"
+        androidTestImplementation "androidx.test.ext:junit:$rootProject.androidxJunitVersion"
+    }
+
+    //JET PACK Libraries closure
+    dependencies {
+
+        //Lifecycle Libraries
+        dependencies {
+            implementation "androidx.lifecycle:lifecycle-livedata-ktx:$rootProject.archLifecycleVersion"
+            implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$rootProject.archLifecycleVersion"
+        }
+
+        //Navigation Library
+        dependencies {
+            implementation "androidx.navigation:navigation-fragment-ktx:$rootProject.navigationVersion"
+            implementation "androidx.navigation:navigation-ui-ktx:$rootProject.navigationVersion"
+        }
+
+        //ROOM DataBase Library
+        dependencies {
+            implementation "androidx.room:room-runtime:$rootProject.roomVersion"
+            implementation "androidx.room:room-ktx:$rootProject.roomVersion"
+            kapt "androidx.room:room-compiler:$rootProject.roomVersion"
+            androidTestImplementation "androidx.room:room-testing:$rootProject.roomVersion"
+        }
+
+        //COROUTINES Library
+        dependencies {
+            implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$rootProject.coroutines"
+        }
+    }
+
+    //Network Connection Library
+    dependencies {
+
+        //Retrofit Network Library
+        dependencies {
+            implementation "com.squareup.retrofit2:retrofit:$rootProject.retrofitVersion"
+            implementation("com.squareup.okhttp3:logging-interceptor:$rootProject.loggingInterceptorVersion")
+            implementation "com.squareup.retrofit2:converter-gson:$rootProject.converterGsonVersion"
+        }
+    }
+
+    //Google Maps Library
+    dependencies {
+        implementation "com.google.android.gms:play-services-location:$rootProject.googleMapApiVersion"
+        implementation "com.google.android.gms:play-services-maps:$rootProject.googleMapApiVersion"
+    }
+}

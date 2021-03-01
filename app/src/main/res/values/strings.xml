@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">Weather</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="hint_degree">25°</string>
+    <string name="hint_weather">sunny</string>
+    <string name="hint_min">min</string>
+    <string name="hint_max">max</string>
+    <string name="hint_current">current</string>
+    <string name="hint_day">Monday</string>
+    <string name="permission_rationale">Weather need your location permission to get you the latest forecast in your area.</string>
+    <string name="permission_denied_explanation">Location Permission Rejected.</string>
+    <string name="no_location_detected">No location detected</string>
+    <string name="settings">Settings</string>
+    <string name="favourite">Favourites</string>
+    <string name="maps_api_key">AIzaSyAd3ai6Y8TblCRHnxEeSksx9gJGOBPBPhA</string>
+</resources>
