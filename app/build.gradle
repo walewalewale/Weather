@@ -54,6 +54,26 @@ android {
     buildFeatures {
         viewBinding true
     }
+
+    signingConfigs {
+        release {
+            def propsFile = rootProject.file('../signing.properties')
+            if (propsFile.exists()) {
+                def props = new Properties()
+                def fileInputStream = new FileInputStream(file('../signing.properties')) //this file should not exist except locally on server, we could have a fake version pushed to the repo regardless
+                props.load(fileInputStream)
+                fileInputStream.close()
+
+            storeFile = file(props['RELEASE_STORE_FILE'])
+            storePassword = props['RELEASE_STORE_PASSWORD']
+            keyAlias = props['RELEASE_KEY_ALIAS']
+            keyPassword = props['RELEASE_STORE_PASSWORD']
+            }
+
+            v1SigningEnabled true
+            v2SigningEnabled true
+        }
+    }
 }
 
 dependencies {
