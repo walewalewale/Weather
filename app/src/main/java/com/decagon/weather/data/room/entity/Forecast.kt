@@ -1,7 +1,5 @@
 package com.decagon.weather.data.room.entity
 
-import androidx.annotation.NonNull
-import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
@@ -16,12 +14,10 @@ class Forecast(
     lon: String,
     lat: String
 ) {
-    @PrimaryKey var id: Int = 0
 
-    @NonNull
-    @ColumnInfo(name = "name")
+    @PrimaryKey(autoGenerate = true) var id: Int = 0
+
     var name : String ?= name
-
     var date:String?= date
     var state: String?= state
     var currentTemp: Double?= currentTemp

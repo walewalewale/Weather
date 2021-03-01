@@ -70,7 +70,7 @@ abstract class WeatherDataBase : RoomDatabase() {
 
         private val MIGRATION_2_3 = object : Migration(2, 3) {
             override fun migrate(database: SupportSQLiteDatabase) {
-                database.execSQL("CREATE TABLE `favourite_table` (`name` TEXT NOT NULL DEFAULT Lagos, `lon` TEXT, `lat` TEXT, " +
+                database.execSQL("CREATE TABLE `favourite_table` (`name` TEXT, `lon` TEXT, `lat` TEXT, " +
                         "PRIMARY KEY(`name`))")
             }
         }

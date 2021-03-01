@@ -111,6 +111,8 @@ class MainActivity : AppCompatActivity(), ForecastActions {
                 requestPermissions()
             }
         }
+
+        getData()
     }
 
     @SuppressLint("MissingPermission")
